@@ -5,10 +5,11 @@ import App from './App'
 import router from './router'
 import MintUI from 'mint-ui'  //前面是命名对象
 import store from './store/index.js'
+import VueTouch from 'vue-touch'
 import axios from 'axios'
+
 import 'mint-ui/lib/style.css'
 import './common/stylus/index.styl'
-import VueTouch from 'vue-touch'
 
 // 设置存储
 global.storage = window.localStorage;
@@ -20,8 +21,9 @@ axios.defaults.withCredentials = true //允许跨域
 global.axios = axios //设置为全局引用
 
 // Vue.prototype.$http = axios //在vue的原型链上添加axios
-Vue.config.productionTip = false  //关闭生产模式下给出的提示
+Vue.config.productionTip = false  //false: 关闭生产模式下给出的提示
 
+//Vue使用对应的插件
 Vue.use(MintUI)
 //{name:'v-touch'}的作用 声明一个以v-touch的标签
 Vue.use(VueTouch, {name: 'v-touch'})

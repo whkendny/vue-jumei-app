@@ -1,5 +1,6 @@
 <template lang="html">
   <div class="footer">
+  <!--http://mint-ui.github.io/docs/#/zh-cn2/tabbar-->
     <mt-tabbar v-model="selected" fixed class="border-1px-top">
       <mt-tab-item id="首页" >
         <img :src="img1" slot="icon">首页
@@ -24,6 +25,7 @@
 <script>
 export default {
   data () {
+//      返回页面中的数据
     return {
       selected: "首页",
       img1: "static/icon/indexchoose.png",
@@ -35,18 +37,23 @@ export default {
   },
   computed: {
     otherSelect () {
+// 通过this.$store 能访问的在根组件下注册的store的实例
+      console.log('otherSelect:--',this.$store.state.selectTab)
       return this.$store.state.selectTab
     }
   },
   watch: {
     // 监听 是否从其他的页面跳转过来的数据
+    //监听上面 computed 中的otherSelect()
     "otherSelect" () {
+    // this.selected  选中的值
       this.selected = this.otherSelect
     },
     // this.$.router.push({name: ''})
     // 固定的书写 ""双引号里面是要监听的数据 handler是处理数据改变的函数 deep是否深度监听
     "selected": {
       handler (val,oldval) { //多看文档 handler
+        console.log('handler-selected',this.selected);
         if (this.selected == "首页") {
           this.$router.push('/')
           this.img1="static/icon/indexchoose.png"
@@ -77,8 +84,8 @@ export default {
         } else {
           this.img5="static/icon/me.png"
         }
-      }
-      // deep:true//对象内部的属性监听，也叫深度监听
+      },
+//       deep:true//对象内部的属性监听，也叫深度监听
     }
   },
 
