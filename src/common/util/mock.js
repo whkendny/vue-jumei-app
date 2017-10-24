@@ -1,6 +1,8 @@
 import Mock from 'mockjs'
-
-
+/*
+* 模拟的数据： 包含每种商品的详细信息
+*
+* */
 export default Mock.mock('/api/data', (req, res) => {
   return {
       activityLists: [
@@ -79,8 +81,6 @@ export default Mock.mock('/api/data', (req, res) => {
               type: 'Lady Danger（亮珊瑚橘）/3g',
               buyTime: '2017-02-15'
             },
-
-
           ],
           types:['Flat out fabulous（哑光玫红）','Brick O la（经典豆沙色）','Red Rock',
             'By special Order', 'Ablaze','Lady Bug (番茄红)','Retro','Cosmo'],
@@ -157,7 +157,6 @@ export default Mock.mock('/api/data', (req, res) => {
               type: '01 柔情紫/5g',
               buyTime: '2017-07-25'
             },
-
           ],
         },
         {
@@ -165,7 +164,7 @@ export default Mock.mock('/api/data', (req, res) => {
           title: '法国•圣罗兰黑管镜面唇釉5.5ml',
           type: 'jumei_deal',
           imgs: [
-            'http://mp5.jmstatic.com/product/003/059/3059407_std/3059407_1000_1000.jpg?v=1484041518&imageView2/2/w/800/q/90',        
+            'http://mp5.jmstatic.com/product/003/059/3059407_std/3059407_1000_1000.jpg?v=1484041518&imageView2/2/w/800/q/90',
           ],
           cartImg: 'http://mp5.jmstatic.com/product/003/059/3059407_std/3059407_1000_1000.jpg?v=1484041518&imageView2/2/w/800/q/90',
           nowPrice: 259,
@@ -223,7 +222,7 @@ export default Mock.mock('/api/data', (req, res) => {
           title: '法国•兰蔻Juicy Shaker 唇釉6.5ml',
           type: 'jumei_deal',
           imgs: [
-            'http://mp5.jmstatic.com/product/002/678/2678723_std/2678723_1000_1000.jpg?v=1494581694&imageView2/2/w/800/q/90',        
+            'http://mp5.jmstatic.com/product/002/678/2678723_std/2678723_1000_1000.jpg?v=1494581694&imageView2/2/w/800/q/90',
           ],
           cartImg: 'http://mp5.jmstatic.com/product/002/678/2678723_std/2678723_1000_1000.jpg?v=1494581694&imageView2/2/w/800/q/90',
           nowPrice: 165,
@@ -278,7 +277,7 @@ export default Mock.mock('/api/data', (req, res) => {
           imgs: [
             'http://mp5.jmstatic.com/product/001/341/1341680_std/1341680_1000_1000.jpg?v=1425959374&imageView2/2/w/800/q/90',
             'http://mp5.jmstatic.com/product/001/341/1341680_std/1341680_1_1000_1000.jpg?v=1425959388&imageView2/2/w/800/q/90',
-            'http://mp4.jmstatic.com/product/001/341/1341680_std/1341680_3_1000_1000.jpg@base@tag=imgScale&w=800&q=90?v=1425959408'    
+            'http://mp4.jmstatic.com/product/001/341/1341680_std/1341680_3_1000_1000.jpg@base@tag=imgScale&w=800&q=90?v=1425959408'
           ],
           cartImg: 'http://mp5.jmstatic.com/product/001/341/1341680_std/1341680_1000_1000.jpg?v=1425959374&imageView2/2/w/800/q/90',
           nowPrice: 229,
@@ -330,12 +329,11 @@ export default Mock.mock('/api/data', (req, res) => {
             },
           ],
         },
-        
       ],
 
 
       goodsList: [
-        
+
       ]
     }
 })

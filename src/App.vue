@@ -20,11 +20,13 @@ export default {
       this.$store.state.cart.added = JSON.parse(storage['cart'])
     }
   },
+
   computed: {
     isTab () {
       return this.$store.state.tabHidden
     }
   },
+
   watch: {
     '$route' () {
       if(!this.$store.state.tabHidden) {
@@ -37,19 +39,19 @@ export default {
 </script>
 
 <style lang="stylus" type="stylesheet/stylus">
-@import 'common/stylus/mixin.styl'
+@import 'common/stylus/mixin.styl';
 .mint-msgbox
   .mint-msgbox-content
     padding 0.3rem
     border none
   .mint-msgbox-btns
     padding-bottom .3rem
-    .mint-msgbox-btn 
+    .mint-msgbox-btn
       border-radius 10rem
       margin .1rem .4rem
       background #ddd
       color #fff
-    .mint-msgbox-confirm  
+    .mint-msgbox-confirm
       background mainColor
       color #fff
 
