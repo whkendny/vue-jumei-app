@@ -1,19 +1,22 @@
 <template lang="html">
   <div class="page">
+  <!--top header-->
     <div class="header">
       <div class="left" @click="leftVisible=true">
         <img class="iconImg" src="../../assets/icon/magic.png" alt="">
       </div>
+
       <div class="search" @click="searchVisible=true">
         <img src="../../assets/icon/search_icon.png" alt="搜索">
         <span class="text">搜索商品 分类 功效 用户</span>
       </div>
+
       <div class="right">
         <img class="iconImg" src="../../assets/icon/message.png" alt="">
       </div>
     </div>
-   
-    <mt-popup v-model="searchVisible" 
+    <!--search popup-->
+    <mt-popup v-model="searchVisible"
       position="right" class="search-content">
       <ul class="searchType">
         <li class="item search-active">商品</li>
@@ -32,16 +35,21 @@
         </li>
       </ul>
     </mt-popup>
+
+    <!--left tab popup-->
     <mt-popup v-model="leftVisible" position="left" class="left-block" modal="true">
       <ul class="left-content">
         <li class="left-item" v-for="item in lefts">{{item}}</li>
       </ul>
     </mt-popup>
+
+<!--header nav-->
     <navbar :navs="navs" :chooseItem="chooseItem"></navbar>
+
     <v-touch @swipeleft="onSwipeleft" @swiperight="onSwipeRight" :priority="1">
       <transition :name="transitionName">
         <keep-alive>
-          <router-view class="Router" @click="start($event)"></router-view>  
+          <router-view class="Router" @click="start($event)"></router-view>
         </keep-alive>
       </transition>
     </v-touch>
@@ -55,7 +63,7 @@ import navbar from '@/components/NavBar.vue'
 export default {
   data () {
     return {
-      navs: ['特卖','极速免税店','母婴','轻奢','服饰','鞋包','食品'],
+      navs: ['特卖','极速免税店','母婴','轻奢','服饰','鞋包','食品'], //上面的page Tab
       transitionName: 'slide-right',
       chooseItem: 0,
       searchVisible: false,
@@ -75,10 +83,12 @@ export default {
   watch: {
     // 监听计算属性 并且它来自vuex中状态
     getNavState(state){
+        console.log('getNavState:---',state)
       var index = state + 1
       // 跳转子页面 this.$router.push()
       this.$router.push('/index/page' + index)
     },
+
     '$route' (to, from) {
       let toNum = to.path.split('/')[2][4]
       let fromNum = from.path.split('/')[2][4]
@@ -102,7 +112,7 @@ export default {
         index < 8  ?  (next = "page" + (index + 1)) &&(this.chooseItem = index + 1) && (this.chooseItem = +index + 1)
        : (next="page8") && (this.chooseItem = 7)
        this.$router.push('/index/' + next)
-      } 
+      }
     },
     onSwipeRight () {
       // this.$router.back(-1)
@@ -116,8 +126,8 @@ export default {
       } else {
         this.$router.push('/index/' + "page6")
       }
-      
-    } 
+
+    }
 
   }
 }
@@ -169,13 +179,13 @@ export default {
   .searchType
     margin .5rem 1.71875rem 0.46875rem 0.4125rem
     display flex
-    .item 
+    .item
       flex 1
       text-align center
       color fontTint
       font-size .4rem
       &.search-active
-        color mainColor  
+        color mainColor
   .input-block
     margin-left 0.4125rem
     .search-input
@@ -207,7 +217,7 @@ export default {
       border .02rem solid borderColor
       margin 0rem 0.3125rem 0.3125rem 0rem
       &:first-child
-        border none 
+        border none
         width 1.4rem
         font-weight 600
         text-align right
@@ -216,7 +226,7 @@ export default {
   left 0.3125rem
   top 4rem
   width 3.59375rem
-  height 5.6rem 
+  height 5.6rem
   display flex
   flex-direction column
   box-shadow 0rem 0rem .3rem fontColor
@@ -233,10 +243,10 @@ export default {
 .Router
   width 100%;
   transition: all .4s ease
-  // slide-right-leave-active 右滑动 左路由 
+  // slide-right-leave-active 右滑动 左路由
   //在过渡的结束状态 跳向下一个的页面的透明度要设置为0  过渡结束的时候都是不显示的
   // slide-right-enter中的透明度为0 代表过渡刚进入也是不显示的
-  &.slide-left-enter, &.slide-right-leave-active 
+  &.slide-left-enter, &.slide-right-leave-active
     opacity 0
     // 向左滑动 其实路由向右走 然后
     transform translateX(100%)

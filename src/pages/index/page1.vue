@@ -2,6 +2,7 @@
 <div class="goods">
   <div class="content-wrapper" ref="contentWrapper">
     <div>
+    <!--good分类-->
       <ul class="types">
         <li class="type-item " v-for="(item, index) in types" :key="index" >
           <img :src="item.src" alt="">
@@ -10,6 +11,8 @@
           </p>
         </li>
       </ul>
+
+    <!--活动专区-->
       <div class="activity">
         <span class="title">好物低价-限时购</span>
         <span class="time">20:00</span>
@@ -21,6 +24,7 @@
         </span>
         <ActivityList></ActivityList>
       </div>
+
       <section class="mixcart-list">
         <div class="tab-title">
           <span class="title-item" v-for="(item, index) in tabs"
@@ -38,9 +42,9 @@
 <script>
 import BScroll from 'better-scroll'
 // 需要引入
-import data from '../../common/util/mock.js'
-import ActivityList from '../../components/ActivityList.vue'
-import GoodsList from '../../components/GoodsList.vue'
+import data from '../../common/util/mock.js'   //mock数据
+import ActivityList from '../../components/ActivityList.vue'  //活动列表
+import GoodsList from '../../components/GoodsList.vue'        //商品列表
 export default {
   data () {
     return {
@@ -61,17 +65,22 @@ export default {
   created () {
     // created是数据初始化的过程 axios会自动解析json格式
     this.$store.dispatch('selectTab', '首页')
+
     axios.get("/api/data").then(res => {
+        console.log(res)
       this.$store.dispatch('addActivity', res.data.activityLists)
       this.$store.dispatch('addGoods', res.data.goodsList)
-      // 异步的 属于放在这里面 等待他们只想完
+      // 列表的数据往往都是异步获取的，因此我们初始化 better-scroll 的时机需要在数据获取后
       this.$nextTick( () => {
+    //  nextTick里面的代码会在DOM更新后执行
+//        console.log(this.$el.textContent)
         this._initScroll()
       })
       // console.log(res.data.goodsList) //获取到里面的数据
     }).catch(err => {
       console.log(err)
     })
+
     this.interval = setInterval(() => {
       if(this.sec > 0) {
         this.sec--
@@ -94,6 +103,7 @@ export default {
   },
   methods: {
     tabClick (index) {
+    //活动tab
       this.tabIndex = index
     },
     _initScroll () {

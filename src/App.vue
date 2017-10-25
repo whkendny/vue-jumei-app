@@ -30,13 +30,16 @@ export default {
   computed: {
   //tab切换
     isTab () {
+  //是否隐藏tab
       return this.$store.state.tabHidden
     }
   },
 
   watch: {
+// 监听路由的改变
     '$route' () {
       if(!this.$store.state.tabHidden) {
+//          在组件中分发action  https://vuex.vuejs.org/zh-cn/actions.html
         this.$store.dispatch('tabHidden')
       }
     }

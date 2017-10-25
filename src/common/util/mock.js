@@ -1,7 +1,6 @@
 import Mock from 'mockjs'
 /*
 * 模拟的数据： 包含每种商品的详细信息
-*
 * */
 export default Mock.mock('/api/data', (req, res) => {
   return {

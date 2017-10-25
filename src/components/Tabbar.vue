@@ -38,7 +38,7 @@ export default {
   computed: {
     otherSelect () {
 // 通过this.$store 能访问的在根组件下注册的store的实例
-      console.log('otherSelect:--',this.$store.state.selectTab)
+//      console.log('otherSelect:--',this.$store.state.selectTab)
       return this.$store.state.selectTab
     }
   },
@@ -52,8 +52,10 @@ export default {
     // this.$.router.push({name: ''})
     // 固定的书写 ""双引号里面是要监听的数据 handler是处理数据改变的函数 deep是否深度监听
     "selected": {
+      //注意：当观察的数据为对象或数组时，curVal和oldVal是相等的，因为这两个形参指向的是同一个数据对象
       handler (val,oldval) { //多看文档 handler
-        console.log('handler-selected',this.selected);
+      //  console.log('handler-selected',val,oldval, this.selected);
+        //  根据路由切换页面
         if (this.selected == "首页") {
           this.$router.push('/')
           this.img1="static/icon/indexchoose.png"

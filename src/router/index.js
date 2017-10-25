@@ -1,19 +1,21 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-
-//可以使用路由懒加载
+//Vue 使用路由
 Vue.use(Router)
 
 export default new Router({
   routes: [
-    { //这里要设置一个默认的主页面 后面才起作用 /代表根目录
+    //首页
+    {
+      //这里要设置一个默认的主页面 后面才起作用 /代表根目录
       path: '/',
       name: 'index',
       component: resolve => require(['@/pages/index/index'], resolve),
       redirect: '/index/page1'
     },
-    { 
+    //首页下的7个 tab页
+    {
       path: '/index',
       component: resolve => require(['@/pages/index/index'], resolve),
       meta: {keepAlive: true},
@@ -23,7 +25,7 @@ export default new Router({
           component: resolve => require(['@/pages/index/index'], resolve)
         },
         {
-          path: 'page1', 
+          path: 'page1',
           name: 'page1',
           component: resolve => require(['@/pages/index/page1'], resolve)
         },
@@ -58,9 +60,11 @@ export default new Router({
         },
       ]
     },
+
+
     {
       path: '/brandsale',
-      name: 'brandSale', 
+      name: 'brandSale',
       component: resolve => require(['@/pages/brandsale/index'], resolve)
     },
     {
@@ -92,7 +96,7 @@ export default new Router({
       path: '/product',
       name: 'product',
       component:  resolve => require(['@/pages/product/index'], resolve),
-      redirect: '/product/info', 
+      redirect: '/product/info',
       children: [
         {
           path: 'info',

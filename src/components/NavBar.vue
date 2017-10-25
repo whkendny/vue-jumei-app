@@ -2,7 +2,7 @@
   <div class="nav">
     <div class="nav-wrapper" ref="navWrapper">
       <ul>
-        <li class="nav-item" v-for="(item,index) in navs" 
+        <li class="nav-item" v-for="(item,index) in navs"
           :style="{marginRight: marginPx + 'rem'}"
           @click="isActive(index)" :class="chooseId==index?'is-selected':''">{{item}}</li>
       </ul>
@@ -19,7 +19,7 @@ export default {
     }
   },
   props: {
-    navs: Array,
+    navs: Array,   //props中传递过来的数据
     chooseItem: Number,
     marginPx: {
       type: String,
@@ -32,6 +32,7 @@ export default {
       // 利用vuex 来进行状态管理 不适用emit
       // this.$emit('selectNav', index)
       this.$store.state.navState = this.chooseId
+      console.log(this.$store.state.navState)
     }
   },
   created () {
@@ -45,7 +46,7 @@ export default {
   },
   watch: {
     "chooseItem" () {
-      this.chooseId = this.chooseItem-1
+      this.chooseId = this.chooseItem - 1
     }
   },
 

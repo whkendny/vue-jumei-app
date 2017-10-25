@@ -17,6 +17,7 @@ const state = {
   selectTab: '首页'
 }
 
+//action
 export default new Vuex.Store({
   state,
   mutations,
