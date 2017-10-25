@@ -89,9 +89,11 @@ export default {
       this.$router.push('/index/page' + index)
     },
 
+  // 监控路由的变化
     '$route' (to, from) {
       let toNum = to.path.split('/')[2][4]
       let fromNum = from.path.split('/')[2][4]
+//      比较进与出页码的值
       if (toNum > fromNum) {
         this.transitionName = 'slide-left'
       } else {
@@ -104,6 +106,7 @@ export default {
     this.$router.push('/index/page1')
   },
   methods: {
+//      从左往右滑
     onSwipeleft () {
       let index = 1
       let next = ""
@@ -111,6 +114,7 @@ export default {
         index =  +this.$route.name[4]
         index < 8  ?  (next = "page" + (index + 1)) &&(this.chooseItem = index + 1) && (this.chooseItem = +index + 1)
        : (next="page8") && (this.chooseItem = 7)
+//        console.log('index:--', index);
        this.$router.push('/index/' + next)
       }
     },
@@ -121,8 +125,9 @@ export default {
       if(this.$route.name != null) {
         index =  +this.$route.name[4]
         index > 1  ?  (back = "page" + (index - 1)) &&(this.chooseItem = index - 1) && (this.chooseItem = +index - 1)
-       : (back="page1") && (this.chooseItem = 1)
-       this.$router.push('/index/' + back)
+       : (back="page1") && (this.chooseItem = 1);
+//        console.log('back:--', back);
+        this.$router.push('/index/' + back)
       } else {
         this.$router.push('/index/' + "page6")
       }
