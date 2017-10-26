@@ -2,6 +2,7 @@
   <div class="page">
     <div class="content" ref="popWrapper">
       <ul>
+      <!--馆名-->
         <section class="list-items">
           <div class="metra-list-one">
             <span><img src="../../assets/dutyfree/free1.jpg" alt=""></span>
@@ -10,6 +11,8 @@
             <span><img src="../../assets/dutyfree/free4.jpg" alt=""></span>
           </div>
         </section>
+
+      <!--全球品牌旗舰店-->
         <section class="list-items">
           <h2 class="items-title">
             <span class="head_bg">
@@ -23,6 +26,7 @@
             </li>
           </ul>
         </section>
+        <!--疯抢专场列表-->
         <section class="list-items">
           <h2 class="items-title">
             <span class="head_bg">
@@ -33,11 +37,11 @@
           <li class="item-list" v-for="(item, index) in pops" :keys="index">
             <div class="pop-image">
               <img alt="" v-lazy="item.img">
-            </div>    
+            </div>
           </li>
         </section>
-        
-      </ul> 
+
+      </ul>
     </div>
   </div>
 </template>
@@ -48,6 +52,7 @@ export default {
   data () {
     return {
       pops: [
+        //疯抢专场， 图片
         {img: 'http://mp5.jmstatic.com//jmstore/image/000/003/3266_std/59c485f7f3728_2048_1024.jpg?1506079705&imageView2/2/w/640/q/90'},
         {img: 'http://mp6.jmstatic.com//jmstore/image/000/006/6282_std/59ba1677abc0e_2048_1024.jpg?1506061433&imageView2/2/w/640/q/90'},
         {img: 'http://mp5.jmstatic.com//jmstore/image/000/006/6377_std/59c4b5d0b637c_2048_1024.jpg?1506070511&imageView2/2/w/640/q/90'},
@@ -55,6 +60,7 @@ export default {
         {img: 'http://mp6.jmstatic.com//jmstore/image/000/005/5151_std/59c0fc0d1c986_2048_1024.jpg?1505962440&imageView2/2/w/640/q/90'},
       ],
       brands: [
+          //品牌旗舰店
         'http://p0.jmstatic.com/pop_store/000/003/3247_std/57b557db8214b_320_320.jpg?1474536101',
         'http://p0.jmstatic.com/pop_store/000/002/2892_std/57fb2e1891a0f_320_320.jpg?1482919085',
         'http://p0.jmstatic.com/pop_store/000/003/3147_std/57a013e9a2685_320_320.jpg?1490690189',
@@ -68,6 +74,7 @@ export default {
     }
   },
   methods: {
+//      滑动
     _initScroll () {
       this.popScroll = new BScroll(this.$refs.popWrapper, {
         click: true,
@@ -76,6 +83,7 @@ export default {
     }
   },
   created () {
+    //      滑动加载
     this.$nextTick(() => {
       this._initScroll()
     })
@@ -85,7 +93,7 @@ export default {
 
 <style lang="stylus" type="stylesheet/stylus" scoped>
 @import '../../common/stylus/mixin.styl'
-.page 
+.page
   overflow hidden
   height 100%
   position absolute
@@ -117,7 +125,7 @@ export default {
           float left
           width 2.5rem
           height 2.5rem
-          img 
+          img
             width 100%
       .items-title
         width 100%
