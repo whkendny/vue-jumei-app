@@ -67,7 +67,7 @@ export default {
     this.$store.dispatch('selectTab', '首页')
 
     axios.get("/api/data").then(res => {
-        console.log(res)
+//        console.log(res)
       this.$store.dispatch('addActivity', res.data.activityLists)
       this.$store.dispatch('addGoods', res.data.goodsList)
       // 列表的数据往往都是异步获取的，因此我们初始化 better-scroll 的时机需要在数据获取后

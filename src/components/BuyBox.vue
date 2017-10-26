@@ -1,5 +1,7 @@
 <template lang="html">
+
   <div class="buy-box border-1px-top">
+
     <div class="icon-block">
       <span class="store-link fs10">
         <img src="../assets/icon/store.png" alt="">
@@ -12,16 +14,21 @@
         <span class="num" v-if="cartQunantity>0">{{cartQunantity}}</span>
       </span>
     </div>
+
     <div class="button-block">
       <span class="add" @click="addToCart">加入到购物车</span>
       <span class="add" @click="addToCart">立即购买</span>
     </div>
+
+    <!--加入购物车选择的弹框-->
     <mt-popup v-model="cartVisible" position="bottom">
         <div class="sku-wrapper">
           <div class="title_content border-1px">
-            <div class="product_imgs" >
+
+            <div class="product_imgs">
               <img :src="product.cartImg" alt="">
             </div>
+
             <div class="product_info">
               <h2 class="product_price">￥{{product.nowPrice}}</h2>
               <div class="select_val">
@@ -29,25 +36,32 @@
                 <strong class="selected_val">{{chooseType}}</strong>
               </div>
             </div>
+
             <i class="close" @click="cartVisible=false"></i>
           </div>
+
           <div class="select_option_wrap">
             <div class="item_content border-1px">
               <div class="property_title">分类</div>
+
                <ul class="property_name">
                  <li class="property_item" v-for="(type, index) in product.types"
-                    @click="chooseTitle='已选',chooseType=type, chooseClick(index)" :class="isChoose==index?'isChoose':''">
+                    @click="chooseTitle='已选',chooseType=type, chooseClick(index)" :class="isChoose==index? 'isChoose':''">
                    {{type}}
                  </li>
                </ul>
             </div>
             <div class="buy-num">
               <span class="num_name">购买数量</span>
+
               <div class="num_content">
+              <!--减-->
                 <span class="shopping shop_reduce" @click="reduceGoods">
                   <img :src="reduceIcon" alt="">
                 </span>
                 <span class="input">{{buyNum}}</span>
+
+                <!--加-->
                 <span class="shopping shop_add" @click="addGoods">
                   <img src="static/icon/addIcon.png" alt="">
                 </span>
@@ -60,7 +74,7 @@
           </div>
         </div>
     </mt-popup>
-    
+
   </div>
 
 </template>
@@ -75,21 +89,22 @@ export default {
       cartVisible: false,
       chooseType: '分类',
       chooseTitle: '请选择',
-      isChoose: -1,
-      buyNum: 1,
+      isChoose: -1,   //选择的类别
+      buyNum: 1,      //买得数量
       reduceIcon: 'static/icon/reductIcon1.png',
       cartCar: '购物车',
       time: {
         min: 20,
         sec: '00.0',
       },
-      clickTime: false
+      clickTime: false  //购物车或者倒计时的选择
     }
   },
   methods: {
     // 真正的添加到购物车
     addCartAtOnce () {
       //  添加  商品信息到购物车
+//      console.log('addCartAtOnce:--', this, this.chooseType, this.buyNum);
       let productInfo = {
         id: this.product.id,
         img: this.product.cartImg,
@@ -104,30 +119,37 @@ export default {
       TimeInterval.cartInterVal.call(this, this.time)
       this.clickTime = true
       this.cartVisible = false
-      this.$emit('ballShowClick')
+//      触发'ballShowClick'事件
+      this.$emit('ballShowClick');
+
     },
     // 分割线
     addToCart () {
       if (!storage['user']) {
+//          未登录弹出登录框
         MessageBox.alert('您尚未登录!').then(action => {
           this.$router.push('/login')
         })
       } else {
+//          登录后弹出选择框
          this.cartVisible = true
       }
     },
     goCartPage () {
+//  点击 购物车 跳转至 购物车
       this.$router.replace('/shopCart')
       this.$store.dispatch('selectTab', '购物车')
     },
     chooseClick (index) {
+//      挑选商品的种类
       this.isChoose = index
     },
     addGoods () {
+//        增加买商品的数量
       this.buyNum++
-     
     },
     reduceGoods () {
+//        减少数量
       if (this.buyNum > 1) {
         this.buyNum--
       }
@@ -135,21 +157,23 @@ export default {
   },
   // 计算属性获取信息
   computed: {
+    //在上面的页面中返回相关的信息
     product () {
       return this.$store.state.productInfo
     },
-    cartQunantity () {
+    cartQunantity () { //购物车显示购买的总数
       let added = this.$store.state.cart.added
       let total = 0
       for (let item of added) {
         total += item.quantity
       }
-      if (!storage['user']) {
+      if (!storage['user']) { //如果是未登录用户
         return 0
       }
       return total
     }
   },
+
   watch: {
     'buyNum' () {
       this.buyNum>1?this.reduceIcon="static/icon/reductIcon2.png":this.reduceIcon="static/icon/reductIcon1.png"

@@ -3,7 +3,7 @@ import * as types from '../mutation-types.js'
 const storage = window.localStorage
 
 const state = {
-  added: [],
+  added: [],   //商品集合
   checkoutStatus: null
 }
 // getter
@@ -44,9 +44,9 @@ const mutations = {
       state.added.splice(index,1)
     }
     storage.setItem('cart', JSON.stringify(state.added))
-    
+
   },
-  
+
 }
 
 export default {

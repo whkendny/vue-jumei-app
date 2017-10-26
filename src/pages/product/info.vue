@@ -7,9 +7,10 @@
           <mt-swipe @change="handleChange" :auto="0">
             <mt-swipe-item v-for="(img, index) in product.imgs" :key="index">
               <img :src="img" alt="" @click="clickImg($event)">
-            </mt-swipe-item>  
+            </mt-swipe-item>
           </mt-swipe>
         </article>
+
         <article class="prop_detail ">
           <div class="price_info">
             ￥<strong class="cur_price">{{product.nowPrice}}</strong>
@@ -25,7 +26,7 @@
             <span>{{sec}}</span>秒
           </div>
         </article>
-        
+
         <article class="desc_wrap border-line ">
           <span class="desc_icon">自营</span>
           {{product.detail}}
@@ -145,7 +146,7 @@ export default {
   },
   methods: {
     clickImg (e) {
-      // 获得当前点击的图片地址 
+      // 获得当前点击的图片地址
       this.showImg = true
       this.imgSrc = e.currentTarget.src //获得当前的点击项目 e.currentTarget
     },
@@ -180,7 +181,7 @@ export default {
       .mint-swipe-indicators.is-active
         background mainColor
         opacity 1
-      .mint-swipe-item 
+      .mint-swipe-item
         width 10rem
         img
           width 10rem

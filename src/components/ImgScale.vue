@@ -12,9 +12,11 @@
 
 <script>
 export default {
+    // 通过props将 imgSrc从父组件传过来
   props: ['imgSrc'],
   methods: {
     bigImg () {
+//        触发clickIt事件
       this.$emit('clickIt')
     }
   }
@@ -23,18 +25,18 @@ export default {
 
 <style lang="stylus" type="stylesheet/stylus" >
 @import '../common/stylus/mixin.styl'
-.fade-enter-active,.fade-leave-active 
+.fade-enter-active,.fade-leave-active
   transition: transform .2s linear
   transform: translate3d(0, 0, 0)
   opacity 0
-.fade-enter,.fade-leave-active 
+.fade-enter,.fade-leave-active
   transform: translateY(-30%)
   opacity 0
 .img-view
   position absolute
-  width 100%  
+  width 100%
   height 100%
-  .img-layer  
+  .img-layer
     position fixed
     z-index 999
     top 0
@@ -44,7 +46,7 @@ export default {
     height 100%
     overflow hidden
   .img-scale
-    img 
+    img
       width 10rem
       display block
       position absolute

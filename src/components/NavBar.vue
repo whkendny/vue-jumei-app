@@ -32,7 +32,7 @@ export default {
       // 利用vuex 来进行状态管理 不适用emit
       // this.$emit('selectNav', index)
       this.$store.state.navState = this.chooseId
-      console.log(this.$store.state.navState)
+//      console.log(this.$store.state.navState)
     }
   },
   created () {

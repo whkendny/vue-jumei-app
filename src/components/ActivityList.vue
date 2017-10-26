@@ -3,9 +3,11 @@
     <ul class="activity-products">
       <li v-for="(item, index) in activityList" :key="index" class="activity-product" @click="findProduct(item.id)">
         <span class="discount">{{item.discount}}<span>折</span></span>
+
         <div class="product-img">
           <img :src="item.imgs[0]" alt="">
         </div>
+
         <div class="product-detail">
           <div class="product-title">{{item.title}}</div>
           <div class="price-wrap">
@@ -13,6 +15,7 @@
             <span class="del-price price-line">￥{{item.oldPrice}}</span>
           </div>
         </div>
+
       </li>
     </ul>
   </div>
@@ -34,6 +37,7 @@ export default {
     }
   },
   created () {
+//      DOM 渲染完成后 让`this.$refs.activityWrapper`对应的部分可以滑动
     this.$nextTick(() => {
       this.activityScroll = new BScroll(this.$refs.activityWrapper, {
         click: true,
@@ -42,6 +46,7 @@ export default {
     })
   },
   methods: {
+//      找到对应的商品并且 路由跳转过去
     findProduct(id) {
       let isfind = false
       // 可以进行async异步处理

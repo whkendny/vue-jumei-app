@@ -26,6 +26,7 @@ export default {
     }
   },
   computed: {
+    //页面中有渲染
     product () {
       // 等数据渲染完成 在加载
       // 或者来使用mapGetters 需要在computed里面 会随着依赖的改变而改变 但是data只会在创建时候声明一次

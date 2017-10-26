@@ -94,11 +94,12 @@ export default {
         this.hasProduct = false
         return []
       }
-     
+
     }
   },
   methods: {
     goToShop () {
+//        点击去逛逛判断是否登录
       if (!storage['user']) {
         MessageBox.alert('您尚未登录!').then(action => {
           this.$router.push('/login')
@@ -109,6 +110,8 @@ export default {
 
     },
     sendNewProduct (id, type, quantity) {
+        console.log('sendNewProduct:---', id, type, quantity)
+//        修改购物车的商品信息
       let newProduct = {id:id, type:type, quantity:quantity}
       this.$store.dispatch('updateThisCart', newProduct)
     },
@@ -126,6 +129,8 @@ export default {
       this.$store.dispatch('updateThisCart', newProduct)
     },
     reduceNum (item) {
+        console.log('reduceNum', item);
+//        对象的解构赋值
       let {id, type, quantity} = item
       quantity--
       if (quantity === 0) {
@@ -136,20 +141,22 @@ export default {
           this.sendNewProduct(id, type, quantity)
         })
       } else {
+//          将 quantity:0; 传到 store 中 购物车列表中的将删掉
        this.sendNewProduct(id, type, quantity)
       }
     }
-     
+
   },
   watch: {
     "chooseAll" () {
+        //点击聚美优品 发货 前的选择按钮
       this.chooseAll?this.chooseOne=true:this.chooseOne=false
     },
     "allCartChoose" () {
       if (this.allCartChoose) {
         this.chooseOne = true
         this.chooseAll = true
-      } else { 
+      } else {
         this.chooseOne = false
         this.chooseAll = false
       }

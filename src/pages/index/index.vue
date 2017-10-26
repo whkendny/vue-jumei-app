@@ -83,7 +83,7 @@ export default {
   watch: {
     // 监听计算属性 并且它来自vuex中状态
     getNavState(state){
-        console.log('getNavState:---',state)
+//        console.log('getNavState:---',state)
       var index = state + 1
       // 跳转子页面 this.$router.push()
       this.$router.push('/index/page' + index)

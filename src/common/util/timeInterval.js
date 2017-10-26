@@ -25,6 +25,7 @@ function cartInterVal (time) {
         this.time.min = 0
       }
     }
+
     if( this.min == 0 && this.sec == 0)
     clearInterval(this.interval)
   }, 100)

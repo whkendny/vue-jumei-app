@@ -92,23 +92,25 @@ export default new Router({
       name: 'login',
       component:  resolve => require(['@/pages/mySelf/login'], resolve)
     },
+
+    //商品详情评价
     {
       path: '/product',
       name: 'product',
       component:  resolve => require(['@/pages/product/index'], resolve),
       redirect: '/product/info',
       children: [
-        {
+        {//商品
           path: 'info',
           name: 'productInfo',
           component: resolve => require(['@/pages/product/info'], resolve)
         },
-        {
+        { //详情
           path: 'detail',
           name: 'productDetail',
           component: resolve => require(['@/pages/product/detail'], resolve)
         },
-        {
+        { //评价
           path: 'comment',
           name: 'productComment',
           component: resolve => require(['@/pages/product/comment'], resolve)

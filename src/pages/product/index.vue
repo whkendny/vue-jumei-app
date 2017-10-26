@@ -1,12 +1,18 @@
+<!--product(商品)页面中的框架部分 -->
 <template lang="html">
+<!--商品信息的顶部-->
   <section class="detail_main">
     <div class="header border-1px">
+    <!--头部左边箭头-->
       <div class="left">
         <router-link to="/">
           <img src="../../assets/icon/arrow_left.png" alt="">
         </router-link>
       </div>
+
       <navbar :navs="navs" class="nav" :chooseItem="chooseItem"></navbar>
+
+      <!--头部右边的收藏及分享标签-->
       <div class="right">
         <div class="love right-icon" @click="clickLove">
           <img :src="loveSrc" alt="">
@@ -16,24 +22,29 @@
         </div>
       </div>
     </div>
+
+    <!--下面的内容部分-->
     <v-touch @swipeleft="onSwipeleft" @swiperight="onSwipeRight" :priority="1">
       <transition :name="transitionName">
         <keep-alive>
+        <!--商品, 详情, 评论view的区域 -->
           <router-view class="Router"></router-view>
         </keep-alive>
        </transition>
     </v-touch>
-    
+
     <div class="ball-container">
+      <!--添加至购物车的动效-->
       <transition name="drop"  @before-enter="beforeDrop" @enter="dropping" @after-enter="afterDrop">
         <div class="ball" v-show="ballShow">
           <img :src="product.cartImg" class="ball-img" alt="">
         </div>
       </transition>
     </div>
+    <!--购买弹框相关部分-->
     <buybox @ballShowClick="ballshowup"></buybox>
-
   </section>
+
 </template>
 
 <script>
@@ -49,12 +60,14 @@ export default {
       loveSrc: 'static/icon/star.png',
       isCollected: false,
       transitionName: 'scroll-left',
-      chooseItem: 1,
-      ballShow: false
+      chooseItem: 1,     //选择商品(1),详情(2),评价(3) 中的一个
+      ballShow: false   //加入商品至购物车的动画是否显示
     }
   },
   computed: {
     getNavState () {
+//        获取nav
+//      console.log(this.$store.state.navState)
       return this.$store.state.navState
     },
     product () {
@@ -69,6 +82,7 @@ export default {
   },
   watch: {
     getNavState (value) {
+//        切换商品详情的路由
       switch(value){
         case 0:
           this.$router.push('/product/info')
@@ -88,6 +102,7 @@ export default {
       if(this.$store.state.tabHidden) {
        this.$store.dispatch('tabHidden')
       }
+    //通过判断路由最后一个路由的名称来区分左右滑动的顺序
       let toPath = to.path.split('/')[2].length
       let fromPath = from.path.split('/')[2].length
       toPath > fromPath ? this.transitionName="scroll-left":this.transitionName="scroll-right"
@@ -98,6 +113,7 @@ export default {
     buybox
   },
   methods: {
+//      加入购物车的动画 *Drop* 方法
     beforeDrop (el) {
       if (this.ballShow) {
         let x = '6'
@@ -128,6 +144,8 @@ export default {
     ballshowup () {
       this.ballShow = true
     },
+
+//    收藏及取消收藏方法
     clickLove () {
       if(!this.isCollected) {
         this.loveSrc = "static/icon/starChoose.png"
@@ -146,6 +164,8 @@ export default {
       }
       this.isCollected = !this.isCollected
     },
+
+//    从左向右滑动
     onSwipeleft () {
       if(this.$store.state.tabHidden) {
        this.$store.dispatch('tabHidden')
@@ -156,7 +176,7 @@ export default {
       //   index < 8  ?  (next = "page" + (index + 1)) &&(this.pageState = index + 1) && (this.pageState = +index + 1)
       //  : (next="page8") && (this.pageState = 7)
       //  this.$router.push('/index/' + next)
-      index = this.$route.name.slice(7)
+      index = this.$route.name.slice(7); //截取最后的名称, Info, Detail, Comment
       switch(index) {
         case 'Info':
           this.$router.push('/product/detail')
@@ -168,9 +188,10 @@ export default {
           break;
         default: break;
        }
-      } 
-     
+      }
+
     },
+    //    从右向左滑动
     onSwipeRight () {
       // this.$router.back(-1)
       if(this.$store.state.tabHidden) {
@@ -190,10 +211,10 @@ export default {
           break;
         default: break;
        }
-      } 
-      
+      }
+
     }
-    
+
 
   }
 
@@ -243,13 +264,13 @@ export default {
   .ball-container
     position absolute
     left 19%
-    bottom 2%   
+    bottom 2%
     z-index 10
-    .ball   
+    .ball
       transition all 0.4s cubic-bezier(0.49, -0.29, 0.75, 0.41)
       height 1rem
       width 1rem
-      .ball-img 
+      .ball-img
         width 100%
         transition: all 0.4s linear
 </style>

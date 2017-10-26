@@ -1,15 +1,19 @@
+<!--购物车-->
 <template lang="html">
   <div class="page">
     <mt-header fixed title="购物车" class="header">
-      <!-- <img src="../../assets/icon/search_icon.png" alt="搜索"> -->
       <mt-button slot="right" class="edit">编辑</mt-button>
       <mt-button slot="right" class="msg">
         <img src="../../assets/icon/message.png" alt="">
       </mt-button>
     </mt-header>
+
+    <!--购物车商品列表-->
     <div class="cart-content" ref="cartWrapper">
       <div>
+
         <cartDetail :allCartChoose="allChoose"></cartDetail>
+
         <div class="recommend">
           <div class="rec-title">
             <span :class="index==chooseIndex?'isRecChoose':''"
@@ -24,9 +28,11 @@
         </div>
       </div>
     </div>
+
+<!--如果没有购买的商品, 则隐藏下面的部分-->
     <div class="submit-button" :class="hasProduct?'':'isHidden'">
       <div class="sub-info">
-        <span class="check-icon" @click="allChoose = !allChoose"> 
+        <span class="check-icon" @click="allChoose = !allChoose">
           <img :src="allChoose?'static/icon/order_checked.png':'static/icon/order_not_checked.png'" alt="">
         </span>
         <span class="all-check-text">全选</span>
@@ -57,18 +63,22 @@ export default {
         min: 20,
         sec: '00',
       },
-      totalPrice: 0,
-      totalQuantity: 0,
-      allChoose: false,
+      totalPrice: 0,     // 总的价钱
+      totalQuantity: 0,  // 总的数量
+      allChoose: false,  // 全选
 
     }
   },
   created () {
-    this.$store.dispatch('selectTab', '购物车')
+//      选中标题
+    this.$store.dispatch('selectTab', '购物车');
+
+//    购物车中的商品组成的集合
     let added = this.$store.state.cart.added
     if (added.length !=0) {
       this.hasProduct = true
     }
+//    没有注册
     if (!storage['user']) {
       this.hasProduct = false
     }
@@ -81,19 +91,21 @@ export default {
     })
   },
   computed: {
+//      监控购物车中商品的列表中商品的变化
     cartLists () {
       // console.log(this.$store.state.cart.added)
       let added = this.$store.state.cart.added
       added.length !=0 ? this.hasProduct = true : this.hasProduct = false
       return added
     },
+//    监控购物车中商品数量的变化
     quantityArray () {
       let added = this.cartLists
       let array = []
       for (let item of added) {
         array.push(item.quantity)
       }
-      // console.log(array)
+//       console.log(array)
       return array
     }
   },
@@ -113,7 +125,7 @@ export default {
         this.$store.state.cart.added = []
         storage.setItem('cart', [])
       }
-     
+
     }
   },
   watch: {
@@ -132,7 +144,7 @@ export default {
         this.totalQuantity = 0
         this.totalPrice = 0
       }
-    } 
+    }
   }
 
 }

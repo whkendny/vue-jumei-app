@@ -1,24 +1,31 @@
 <template lang="html">
   <div class="comments">
+
     <img-scale v-if="showImg" @clickIt="viewImg" :imgSrc="imgSrc"></img-scale>
+
     <div class="comment-wrapper" ref="commentWrapper">
       <ul>
         <li class="comment-item border-1px" v-for="(item, index) in comments" :key="index">
+
           <div class="customer-info">
-            <img :src="item.avatar" alt="">
+            <img :src="item.avatar" alt="">  <!--会员的头像-->
             <span class="detail">
-              <p class="name">{{item.name}}</p>
-              <span class="block">{{item.member}}  加入聚美{{item.joinTime}}天</span>
+              <p class="name">{{item.name}}</p>  <!--购买会员的名字-->
+              <span class="block">{{item.member}}  加入聚美{{item.joinTime}}天</span> <!--加入天数-->
             </span>
+
             <span class="buyTime">购买于 {{item.buyTime}}</span>
           </div>
-          <p class="comment-detail">
+
+          <p class="comment-detail"> <!--评论区-->
             {{item.comment}}
           </p>
-          <p class="comment-img">
+
+          <p class="comment-img"> <!--评论区部分图片-->
             <img :src="img" alt="" v-for="img in item.imgs" @click="clickImg($event)">
           </p>
-          <div class="type-block">
+
+          <div class="type-block">  <!--型号-->
             <span class="type">型号: {{item.type}}</span>
           </div>
         </li>
@@ -28,6 +35,7 @@
 </template>
 
 <script>
+
 import BScroll from 'better-scroll'
 import ImgScale from '@/components/ImgScale.vue'
 export default {
@@ -58,7 +66,7 @@ export default {
     'img-scale': ImgScale
   },
   methods: {
-    clickImg (e) {
+    clickImg (e) {  //可视图片
       this.showImg = true
       this.imgSrc = e.currentTarget.src
     },
