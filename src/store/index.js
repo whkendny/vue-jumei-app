@@ -7,7 +7,7 @@ import cart from './mudules/cart'
 
 Vue.use(Vuex)
 
-// 存放着组件中信息的状态
+// 存放着组件中信息的状态, 这里放的是项目的全局状态
 const state = {
   navState: 0,  //获取导航条的状态 (全局导航栏都可用)
   activityList: [],

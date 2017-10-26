@@ -32,7 +32,7 @@
     </div>
 
   </transition>
-  
+
 </template>
 
 <script>
@@ -58,7 +58,7 @@ export default {
     },
     loginout () {
       MessageBox.alert('退出登录成功!').then(action => {
-        storage.setItem('user', '')
+        storage.setItem('user', ''); //清除storage
         this.$router.push('/myself')
       })
     }
@@ -80,7 +80,7 @@ export default {
     opacity 1
   position absolute
   left 0
-  right 0 
+  right 0
   bottom 0
   top 0
   background bgColor
