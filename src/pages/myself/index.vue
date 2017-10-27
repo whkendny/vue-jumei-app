@@ -4,43 +4,55 @@
       <mt-button icon="" slot="right" class="icon" @click="setterClick">
         <img src="static/mine/setwhite.png" alt="">
       </mt-button>
+
       <mt-button icon="" slot="right" class="icon" >
         <img src="static/mine/msgwhite.png" alt="">
       </mt-button>
     </mt-header>
+
     <div class="wrapper" ref="mineWrapper">
       <div>
+        <!--用户信息部分-->
         <div class="user-block">
+          <!--用户登录-->
           <div class="user-login">
             <div class="user-logo">
               <img src="../../assets/bg/jumeibg2.jpg" alt="">
             </div>
+            <!--未登录-->
             <div class="operation" @click="loginClick" v-if="!userLogin">
               <span class="signup">注册</span>
               <span class="separator"></span>
               <span class="login">登录</span>
             </div>
+            <!--登陆-->
             <div class="login-success" v-if="userLogin">
               <div class="username">{{userLogin}}</div>
               <div class="autograph">我需要一个长势旺盛的个性签名</div>
             </div>
           </div>
+
+          <!--关注人数-->
           <ul class="user-info">
             <li class="item"><span>0</span><p>粉丝</p></li>
             <li class="item"><span>0</span><p>关注</p></li>
             <li class="item"><span>0</span><p>帖子</p></li>
             <li class="item"><span></span><p>个人资料</p></li>
           </ul>
+          <!--遮罩层-->
           <div class="user-mask">
             <img src="../../assets/bg/jumeibg2.jpg" alt="">
           </div>
           <div class="fint-mask"></div>
         </div>
+
+        <!--订单部分-->
         <div class="order-fund-block">
           <div class="block-title">
             <span>买买买</span>
             <span class="block-title-nav">查看全部订单</span>
           </div>
+
           <ul class="order-content content">
             <li class="item" v-for="(item, index) in orderContent" :key="index">
               <span class="order-logo">
@@ -49,6 +61,7 @@
               <p>{{item.title}}</p>
             </li>
           </ul>
+
           <ul class="fund-content content">
             <li class="item" v-for="(item, index) in fundContent" :key="index">
               <span class="value">{{item.number}}</span>
@@ -56,6 +69,8 @@
             </li>
           </ul>
         </div>
+
+        <!--聚美部分-->
         <div class="jumei-block">
           <ul class="jumei-content">
             <li class="jumei-item" v-for="(item, index) in jumeiContent1" :key="index">
@@ -82,6 +97,8 @@
             </li>
           </ul>
         </div>
+
+        <!--广告及联系人部分-->
         <div class="contact-block">
           <span class="contact-img">
             <img src="../../assets/bg/valueLoad.jpg" alt="">
@@ -139,13 +156,14 @@ export default {
     }
   },
   created () {
-    this.$nextTick(() => {
-      this._initScroll()
-    })
     this.$store.state.selectTab = "我的"
     var storage = window.localStorage
     let username = storage["user"]
-    username ? this.userLogin=username : this.userLogin=""
+    this.userLogin= username ? username : "";
+    this.$nextTick(() => {
+      this._initScroll()
+    })
+
   },
   methods: {
     _initScroll () {
@@ -153,7 +171,8 @@ export default {
         click: true,
         probeType: 3
       })
-      // 监听滚动高度变化
+      // 监听滚动高度变化, 'scroll': 是其事件
+      //scroll事件的触发与probeType 有关
       this.mineScroll.on('scroll', (pos) => {
         this.scrollY = Math.abs(Math.round(pos.y))
       })
@@ -167,9 +186,10 @@ export default {
     }
   },
   watch: {
+//    `watch`: 监听data 中数据 "scrollY"的变化
     "scrollY" () {
       if(this.scrollY > 135) {
-        // console.log("成功")
+//         console.log("成功")
       }
     }
   }
