@@ -3,6 +3,10 @@ export default {
   // increment({commit}){
   //       commit("INCREMENT")
   //   },
+
+  //通过commit (提交) 唤醒一个 mutation handler
+  //value 是mutation的载荷(payload)
+  // 参数解构
   addActivity ({commit}, value) {
     commit(types.ADDACTIVITY, value)
   },

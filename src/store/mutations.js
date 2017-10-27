@@ -4,6 +4,9 @@ export default {
   //  INCREMENT(state) {
   //      state.count++;
   //  },
+
+   //定义类似于事件的mutation
+  //value 是mutation的载荷(payload)
    [types.ADDACTIVITY](state, value) {
      state.activityList = value
    },
