@@ -1,5 +1,7 @@
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
+// 主要是利用ES6的模块化 引入模块
+
 import Vue from 'vue'
 import App from './App'
 import router from './router'
@@ -34,6 +36,6 @@ new Vue({
   router,
   store,
   // 选择了standalone方式， https://segmentfault.com/q/1010000007723106?_ea=1435549
-  template: '<App/>',
-  components: { App }
+  template: '<App/>', /* 给Vue实例初始一个App组件作为template 相当于默认组件 */
+  components: { App } /* 注册引入的组件App.vue */
 })

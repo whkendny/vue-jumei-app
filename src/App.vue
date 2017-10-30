@@ -11,6 +11,7 @@
 import tabbar from '@/components/Tabbar.vue'
 export default {
   // 组件在它的模板内可以递归地调用自己，只有当它有 name 选项时才可以。
+  // https://cn.vuejs.org/v2/api/#name
   name: 'app',
   components: {
     tabbar: tabbar
@@ -19,6 +20,7 @@ export default {
   created () {
     this.$router.push('/index/page1')
 //    storage ==> window.localStorage
+//    判断是否有添加的商品
     if(!storage['cart']) {
       storage.setItem('cart', '[]')
     } else {
