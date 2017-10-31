@@ -32,6 +32,8 @@ export default {
   computed: {
   //tab切换
     isTab () {
+//Vue组件中获得Vuex状态的方法:  在计算属性中返回tabHidden状态,
+//      所有子组件通过 this.$store可以访问到在根实例中注册的store
   //是否隐藏tab
       return this.$store.state.tabHidden
     }
